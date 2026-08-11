@@ -1,15 +1,14 @@
 import { auth } from "@/lib/auth";
-// import type { AppRole } from "@/lib/auth/modules/authorization/permissions";
 import { NextRequest, NextResponse } from "next/server";
 
-const AUTH_ONLY_PATHS = ["/auth/sign-in", "/auth/sign-up"];
+const AUTH_ONLY_PATHS = ["/admin/auth/sign-in", "/admin/auth/sign-up"];
 const SESSION_COOKIE_NAME =
   process.env.NODE_ENV === "development"
     ? "better-auth.session_token"
     : "__Secure-better-auth.session_token";
 // const ROLE_PROTECTED: { prefix: string; requiredRole: AppRole }[] = [
-//   { prefix: "/dashboard/settings", requiredRole: "admin" },
-//   { prefix: "/dashboard/users", requiredRole: "admin" },
+//   { prefix: "/admin/settings", requiredRole: "admin" },
+//   { prefix: "/admin/users", requiredRole: "admin" },
 // ];
 
 export async function proxy(request: NextRequest) {
@@ -21,11 +20,16 @@ export async function proxy(request: NextRequest) {
   const isAuthOnly = AUTH_ONLY_PATHS.some((path) => pathname.startsWith(path));
   const sessionCookie = request.cookies.get(SESSION_COOKIE_NAME)?.value;
 
+  // Better Auth handles its own /admin/api/auth routes
+  if (pathname.startsWith("/admin/api")) {
+    return NextResponse.next();
+  }
+
   if (!sessionCookie) {
     if (!isAuthOnly) {
       const url = request.nextUrl.clone();
       url.searchParams.set("callbackUrl", callbackUrl);
-      url.pathname = "/auth/sign-in";
+      url.pathname = "/admin/auth/sign-in";
       return NextResponse.redirect(url);
     }
 
@@ -40,25 +44,25 @@ export async function proxy(request: NextRequest) {
     if (!session?.session && !isAuthOnly) {
       const url = request.nextUrl.clone();
       url.searchParams.set("callbackUrl", callbackUrl);
-      url.pathname = "/auth/sign-in";
+      url.pathname = "/admin/auth/sign-in";
       return NextResponse.redirect(url);
     }
 
     // const sessionRole = (session?.user as { role?: string } | undefined)?.role;
 
     // if (roleProtectedRoute && sessionRole !== roleProtectedRoute.requiredRole) {
-    //   return NextResponse.redirect(new URL("/", request.url));
+    //   return NextResponse.redirect(new URL("/admin", request.url));
     // }
 
     if (isAuthOnly && session?.session) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/admin", request.url));
     }
   } catch (error) {
     console.error(error);
     if (!isAuthOnly) {
       const url = request.nextUrl.clone();
       url.searchParams.set("callbackUrl", callbackUrl);
-      url.pathname = "/auth/sign-in";
+      url.pathname = "/admin/auth/sign-in";
       return NextResponse.redirect(url);
     }
   }
@@ -67,5 +71,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  matcher: ["/admin/:path*"],
 };

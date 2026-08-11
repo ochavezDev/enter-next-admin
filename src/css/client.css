@@ -1,0 +1,175 @@
+@theme {
+  --color-es-on-primary: #00363d;
+  --color-es-on-primary-container: #00626e;
+  --color-es-on-primary-fixed: #001f24;
+  --color-es-on-surface: #d4e4fa;
+  --color-es-on-surface-variant: #bac9cc;
+  --color-es-on-background: #d4e4fa;
+  --color-es-on-error: #690005;
+  --color-es-on-error-container: #ffdad6;
+
+  --color-es-surface: #051424;
+  --color-es-surface-dim: #051424;
+  --color-es-surface-bright: #2c3a4c;
+  --color-es-surface-container: #122131;
+  --color-es-surface-container-low: #0d1c2d;
+  --color-es-surface-container-lowest: #010f1f;
+  --color-es-surface-container-high: #1c2b3c;
+  --color-es-surface-container-highest: #273647;
+  --color-es-surface-variant: #273647;
+  --color-es-surface-tint: #00daf3;
+
+  --color-es-primary: #c3f5ff;
+  --color-es-primary-fixed: #9cf0ff;
+  --color-es-primary-fixed-dim: #00daf3;
+  --color-es-primary-container: #00e5ff;
+
+  --color-es-secondary: #bcc7de;
+  --color-es-secondary-container: #3e495d;
+
+  --color-es-tertiary: #e8ecff;
+  --color-es-tertiary-container: #c8d0ea;
+
+  --color-es-outline: #849396;
+  --color-es-outline-variant: #3b494c;
+  --color-es-background: #051424;
+  --color-es-inverse-surface: #d4e4fa;
+  --color-es-inverse-on-surface: #233143;
+  --color-es-inverse-primary: #006875;
+  --color-es-error: #ffb4ab;
+  --color-es-error-container: #93000a;
+
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 48px;
+  --spacing-max-width: 1440px;
+
+  --font-es-headline-lg-mobile: 'Inter', sans-serif;
+  --font-es-headline-lg: 'Inter', sans-serif;
+  --font-es-headline-md: 'Inter', sans-serif;
+  --font-es-body-lg: 'Inter', sans-serif;
+  --font-es-body-md: 'Inter', sans-serif;
+  --font-es-label-sm: 'JetBrains Mono', monospace;
+
+  --text-es-headline-lg-mobile: 30px;
+  --text-es-headline-lg-mobile--line-height: 36px;
+  --text-es-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-es-headline-lg-mobile--font-weight: 700;
+
+  --text-es-headline-lg: 40px;
+  --text-es-headline-lg--line-height: 48px;
+  --text-es-headline-lg--letter-spacing: -0.02em;
+  --text-es-headline-lg--font-weight: 700;
+
+  --text-es-headline-md: 24px;
+  --text-es-headline-md--line-height: 32px;
+  --text-es-headline-md--letter-spacing: -0.01em;
+  --text-es-headline-md--font-weight: 600;
+
+  --text-es-body-lg: 18px;
+  --text-es-body-lg--line-height: 28px;
+  --text-es-body-lg--font-weight: 400;
+
+  --text-es-body-md: 16px;
+  --text-es-body-md--line-height: 24px;
+  --text-es-body-md--font-weight: 400;
+
+  --text-es-label-sm: 12px;
+  --text-es-label-sm--line-height: 16px;
+  --text-es-label-sm--font-weight: 500;
+}
+
+.es-client ::selection {
+  background: var(--color-es-primary-container);
+  color: var(--color-es-on-primary-container);
+}
+
+.es-fill-1 {
+  font-variation-settings: 'FILL' 1;
+}
+
+.glass-panel {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+.tech-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 218, 243, 0.15);
+}
+
+.card-level-1 {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: var(--color-es-primary-container);
+  color: var(--color-es-on-primary-container);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 12px var(--color-es-primary-container);
+  transform: translateY(-1px);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #00daf3, #c3f5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.inner-light-top {
+  position: relative;
+}
+.inner-light-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.form-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.125rem;
+  background-color: var(--color-es-surface-container);
+  border: 1px solid var(--color-es-outline-variant);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.form-checkbox:checked {
+  background-color: var(--color-es-primary-container);
+  border-color: var(--color-es-primary-container);
+}

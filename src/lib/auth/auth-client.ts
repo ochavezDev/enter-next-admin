@@ -3,6 +3,7 @@ import { createAuthClient } from "better-auth/react";
 import { auth } from "./auth";
 
 export const authClient = createAuthClient({
+  basePath: "/admin/api/auth",
   plugins: [inferAdditionalFields<typeof auth>()],
 });
 

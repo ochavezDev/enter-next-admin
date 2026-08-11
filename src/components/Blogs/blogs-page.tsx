@@ -93,7 +93,7 @@ export function BlogsPage() {
   const fetchBlogs = useCallback(async () => {
     setCargando(true);
     try {
-      const res = await fetch("/api/blogs");
+      const res = await fetch("/admin/api/blogs");
       if (!res.ok) {
         toast.error(await leerError(res));
         return;
@@ -224,7 +224,7 @@ export function BlogsPage() {
         payload.imagen = "";
       }
 
-      const url = editando ? `/api/blogs/${editando.id}` : "/api/blogs";
+      const url = editando ? `/admin/api/blogs/${editando.id}` : "/admin/api/blogs";
       const res = await fetch(url, {
         method: editando ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
@@ -260,7 +260,7 @@ export function BlogsPage() {
     }
 
     try {
-      const res = await fetch(`/api/blogs/${blog.id}`, { method: "DELETE" });
+      const res = await fetch(`/admin/api/blogs/${blog.id}`, { method: "DELETE" });
 
       if (!res.ok) {
         toast.error(await leerError(res));

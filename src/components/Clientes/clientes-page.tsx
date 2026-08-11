@@ -116,7 +116,7 @@ export function ClientesPage() {
   const fetchClientes = useCallback(async () => {
     setCargando(true);
     try {
-      const res = await fetch("/api/clientes");
+      const res = await fetch("/admin/api/clientes");
       if (!res.ok) {
         toast.error(await leerError(res));
         return;
@@ -177,7 +177,7 @@ export function ClientesPage() {
 
     setGuardando(true);
     try {
-      const url = editando ? `/api/clientes/${editando.id}` : "/api/clientes";
+      const url = editando ? `/admin/api/clientes/${editando.id}` : "/admin/api/clientes";
       const res = await fetch(url, {
         method: editando ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
@@ -213,7 +213,7 @@ export function ClientesPage() {
     }
 
     try {
-      const res = await fetch(`/api/clientes/${cliente.id}`, {
+      const res = await fetch(`/admin/api/clientes/${cliente.id}`, {
         method: "DELETE",
       });
 

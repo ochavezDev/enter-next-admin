@@ -9,6 +9,7 @@ if (!process.env.BETTER_AUTH_SECRET) {
 export const auth = betterAuth({
   appName: "NextAdmin",
   baseURL: process.env.BETTER_AUTH_URL!,
+  basePath: "/admin/api/auth",
 
   user: {
     additionalFields: {
