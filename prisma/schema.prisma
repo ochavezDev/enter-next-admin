@@ -70,3 +70,68 @@ model Verification {
   @@index([identifier], map: "verification_identifier_idx")
   @@map("verification")
 }
+
+enum TipoDocumento {
+  DNI
+  RUC
+}
+
+enum EstadoRegistro {
+  Activo
+  Inactivo
+}
+
+enum EstadoBlog {
+  Publicado
+  Borrador
+}
+
+model Cliente {
+  id              String         @id @default(uuid())
+  nombre          String
+  email           String
+  telefono        String
+  tipoDocumento   TipoDocumento  @map("tipo_documento")
+  numeroDocumento String         @map("numero_documento")
+  direccion       String
+  estado          EstadoRegistro @default(Activo)
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  @@unique([email])
+  @@unique([tipoDocumento, numeroDocumento])
+  @@map("cliente")
+}
+
+model Producto {
+  id          String         @id @default(uuid())
+  nombre      String
+  descripcion String
+  precio      Decimal        @db.Decimal(10, 2)
+  stock       Int
+  categoria   String
+  imagen      String?
+  estado      EstadoRegistro @default(Activo)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+  articulos   Blog[]         @relation("BlogProductos")
+
+  @@unique([nombre])
+  @@map("producto")
+}
+
+model Blog {
+  id               String     @id @default(uuid())
+  titulo           String
+  contenido        String
+  autor            String
+  fechaPublicacion DateTime   @map("fecha_publicacion")
+  estado           EstadoBlog @default(Borrador)
+  imagen           String?
+  createdAt        DateTime   @default(now()) @map("created_at")
+  updatedAt        DateTime   @updatedAt @map("updated_at")
+  productos        Producto[] @relation("BlogProductos")
+
+  @@unique([titulo])
+  @@map("blog")
+}

@@ -13,6 +13,9 @@ const SESSION_COOKIE_NAME =
 // ];
 
 export async function proxy(request: NextRequest) {
+  // TODO: auth gate temporarily disabled — remove this early return to re-enable login
+  return NextResponse.next();
+
   const { pathname } = request.nextUrl;
   const callbackUrl = `${pathname}${request.nextUrl.search}`;
   const isAuthOnly = AUTH_ONLY_PATHS.some((path) => pathname.startsWith(path));
